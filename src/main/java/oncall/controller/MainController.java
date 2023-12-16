@@ -23,6 +23,8 @@ public class MainController {
     public void run() {
         initializeCalender();
         makeWorkQueue();
+        calender.setRoster(weekdayWorkQueue, weekendWorkQueue);
+        printResult();
     }
 
     private void initializeCalender() {
@@ -46,5 +48,9 @@ public class MainController {
             System.out.println(e.getMessage());
             makeWorkQueue();
         }
+    }
+
+    private void printResult() {
+
     }
 }
