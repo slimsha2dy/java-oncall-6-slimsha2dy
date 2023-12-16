@@ -12,6 +12,7 @@ public class Validator {
     private static final int QUEUE_MAX = 35;
     private static final int MONTH_INDEX = 0;
     private static final int DAY_OF_WEEK_INDEX = 1;
+    private static final List<Character> digits = List.of('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
     public static void validateInput(String input) {
         if (input.isEmpty() || isEndWithComma(input)) {
@@ -36,6 +37,11 @@ public class Validator {
 
     public static void validateMonthDay(List<String> input) {
         if (input.size() != FIRST_INPUT_LENGTH) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
+        }
+        try {
+            int month = Integer.parseInt(input.get(MONTH_INDEX));
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
         }
         if (!isStringNumber(input.get(MONTH_INDEX))
@@ -74,7 +80,7 @@ public class Validator {
 
     public static boolean isStringNumber(String input) {
         for (int i = 0; i < input.length() - 1; ++i) {
-            if (input.charAt(i) < '0' || input.charAt(i) > '9') {
+            if (!digits.contains(input.charAt(i))) {
                 return false;
             }
         }
