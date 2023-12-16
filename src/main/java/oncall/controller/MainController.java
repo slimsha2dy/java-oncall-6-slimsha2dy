@@ -5,11 +5,14 @@ import java.util.List;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 import oncall.model.Calender;
+import oncall.model.WorkQueue;
 
 public class MainController {
     private final InputView inputView;
     private final OutputView outputView;
     private Calender calender;
+    private WorkQueue weekdayWorkQueue;
+    private WorkQueue weekendWorkQueue;
 
     public MainController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -18,6 +21,7 @@ public class MainController {
 
     public void run() {
         initializeCalender();
+        makeWorkQueue();
     }
 
     private void initializeCalender() {
@@ -27,6 +31,18 @@ public class MainController {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             initializeCalender();
+        }
+    }
+
+    private void makeWorkQueue() {
+        try {
+            List<String> input = inputView.readWorkQueueWeekDay();
+            this.weekdayWorkQueue = new WorkQueue(input);
+            input = inputView.readWorkQueueWeekEnd();
+            this.weekendWorkQueue = new WorkQueue(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            makeWorkQueue();
         }
     }
 }

@@ -41,6 +41,21 @@ public class Validator {
         }
     }
 
+    public static void validateWorkQueue(List<String> input) {
+        if (input.isEmpty() || input.size() < 5 || input.size() > 35) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
+        }
+        for (String string : input) {
+            validateName(string);
+        }
+    }
+
+    public static void validateName(String input) {
+        if (input.isEmpty() || input.length() > 5) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
+        }
+    }
+
     public static boolean isStringNumber(String input) {
         for (int i = 0; i < input.length() - 1; ++i) {
             if (input.charAt(i) < '0' || input.charAt(i) > '9') {
