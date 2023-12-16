@@ -160,6 +160,62 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 근무순번_포맷_테스트1() {
+        assertSimpleTest(() -> {
+            runException("1,월", "\n");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 근무순번_포맷_테스트2() {
+        assertSimpleTest(() -> {
+            runException("1,월", "안녕,하세,요구,,아줌");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 근무순번_포맷_테스트3() {
+        assertSimpleTest(() -> {
+            runException("1,월", "안녕,하세,요구,루트,아줌,");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 근무순번_테스트1() {
+        assertSimpleTest(() -> {
+            runException("1,월", "안녕,하세,요구,루트,아줌,안녕");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 근무순번_테스트2() {
+        assertSimpleTest(() -> {
+            runException("1,월", "안녕,하세,요구,루트,아줌,안녕하세요구");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 근무순번_테스트3() {
+        assertSimpleTest(() -> {
+            runException("1,월", "안녕,하세,요구,루트");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 근무순번_테스트4() {
+        assertSimpleTest(() -> {
+            runException("1,월", "허브,쥬니,말랑,라온,헤나,우코,에단,수달,파워,히이로,마코,슬링키,모디,연어,깃짱,리오,고니,박스터,달리,조이,노아이즈,도이,도치,홍고,스캇,폴로,해시,로지,첵스,아이크,우가,푸만능,애쉬,로이스,오션,안녕,하세,요구,루트");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
