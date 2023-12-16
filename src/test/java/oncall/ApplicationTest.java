@@ -216,6 +216,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 근무순번_비교_테스트1() {
+        assertSimpleTest(() -> {
+            runException("1,월", "안녕,하세,요구,루트,아줌", "아줌,루트,요구,하세,하이");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 근무순번_비교_테스트2() {
+        assertSimpleTest(() -> {
+            runException("1,월", "안녕,하세,요구,루트,아줌", "아줌,루트,요구,하세,안녕,요이");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
