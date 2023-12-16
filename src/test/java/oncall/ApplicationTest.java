@@ -72,6 +72,94 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 월_요일_포맷_테스트1() {
+        assertSimpleTest(() -> {
+            runException("\n");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 월_요일_포맷_테스트2() {
+        assertSimpleTest(() -> {
+            runException("1,월,");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 월_요일_포맷_테스트3() {
+        assertSimpleTest(() -> {
+            runException("1,");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 월_요일_포맷_테스트4() {
+        assertSimpleTest(() -> {
+            runException(",월");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 월_요일_포맷_테스트5() {
+        assertSimpleTest(() -> {
+            runException("1,월,2");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 월_테스트1() {
+        assertSimpleTest(() -> {
+            runException("월,화");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 월_테스트2() {
+        assertSimpleTest(() -> {
+            runException("13,화");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 월_테스트3() {
+        assertSimpleTest(() -> {
+            runException("0,화");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 요일_테스트1() {
+        assertSimpleTest(() -> {
+            runException("1,2");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 요일_테스트2() {
+        assertSimpleTest(() -> {
+            runException("1,묵");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
+    @Test
+    void 요일_테스트3() {
+        assertSimpleTest(() -> {
+            runException("1,장충동왕족발보쌈");
+            assertThat(output()).contains("[ERROR] ");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
