@@ -1,6 +1,7 @@
 package oncall.util;
 
 import java.util.List;
+import oncall.model.WorkQueue;
 
 public class Validator {
     private static final int MIN_MONTH = 1;
@@ -47,6 +48,15 @@ public class Validator {
         }
         for (String string : input) {
             validateName(string);
+        }
+    }
+
+    public static void validateTwoQueue(WorkQueue first, WorkQueue second) {
+        if (first.size() != second.size()) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
+        }
+        if (!first.haveEqualMember(second)) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
         }
     }
 

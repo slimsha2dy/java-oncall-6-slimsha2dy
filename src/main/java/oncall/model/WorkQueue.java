@@ -19,4 +19,17 @@ public class WorkQueue {
             nameQueue.add(string);
         }
     }
+
+    public int size() {
+        return this.nameQueue.size();
+    }
+
+    public boolean haveEqualMember(WorkQueue other) {
+        for (String name : nameQueue) {
+            if (!other.nameQueue.contains(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

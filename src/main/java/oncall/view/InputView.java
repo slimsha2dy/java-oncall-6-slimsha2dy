@@ -32,7 +32,7 @@ public class InputView {
     }
 
     public List<String> readWorkQueueWeekEnd() {
-        System.out.println(Message.INPUT_WEEKEND_QUEUE.get());
+        System.out.print(Message.INPUT_WEEKEND_QUEUE.get());
         String input = Console.readLine();
         Validator.validateInput(input);
         return Utility.splitWithComma(input);

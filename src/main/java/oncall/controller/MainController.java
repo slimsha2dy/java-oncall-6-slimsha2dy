@@ -2,6 +2,7 @@ package oncall.controller;
 
 import java.util.List;
 
+import oncall.util.Validator;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 import oncall.model.Calender;
@@ -40,6 +41,7 @@ public class MainController {
             this.weekdayWorkQueue = new WorkQueue(input);
             input = inputView.readWorkQueueWeekEnd();
             this.weekendWorkQueue = new WorkQueue(input);
+            Validator.validateTwoQueue(weekdayWorkQueue, weekendWorkQueue);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             makeWorkQueue();
