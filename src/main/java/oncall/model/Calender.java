@@ -2,6 +2,7 @@ package oncall.model;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 import oncall.util.DayOfWeek;
@@ -18,6 +19,7 @@ public class Calender {
         int month = Integer.parseInt(input.get(0));
         this.startDay = LocalDate.of(2023, month, 1);
         this.startDayOfWeek = DayOfWeek.getFromString(input.get(1));
+        roster = new ArrayList<>();
     }
 
     public void setRoster(WorkQueue weekdayQueue, WorkQueue weekendQueue) {
@@ -48,5 +50,17 @@ public class Calender {
             return true;
         }
         return false;
+    }
+
+    public DayOfWeek getStartDayOfWeek() {
+        return this.startDayOfWeek;
+    }
+
+    public LocalDate getStartDay() {
+        return this.startDay;
+    }
+
+    public List<String> getRoster() {
+        return this.roster;
     }
 }

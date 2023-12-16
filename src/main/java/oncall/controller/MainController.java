@@ -1,7 +1,9 @@
 package oncall.controller;
 
 import java.util.List;
+import java.time.LocalDate;
 
+import oncall.util.DayOfWeek;
 import oncall.util.Validator;
 import oncall.view.InputView;
 import oncall.view.OutputView;
@@ -51,6 +53,9 @@ public class MainController {
     }
 
     private void printResult() {
-
+        DayOfWeek startDayOfWeek = calender.getStartDayOfWeek();
+        LocalDate startDay = calender.getStartDay();
+        List<String> roster = calender.getRoster();
+        outputView.printResult(startDayOfWeek, startDay, roster);
     }
 }
