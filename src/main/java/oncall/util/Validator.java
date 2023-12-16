@@ -1,6 +1,11 @@
 package oncall.util;
 
+import java.util.List;
+
 public class Validator {
+    private static final int MIN_MONTH = 1;
+    private static final int MAX_MONTH = 12;
+
     public static void validateInput(String input) {
         if (input.isEmpty() || isEndWithComma(input)) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
@@ -20,6 +25,29 @@ public class Validator {
         if (splitted.length != 2) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
         }
+    }
+
+    public static void validateMonthDay(List<String> input) {
+        if (input.size() != 2) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
+        }
+        if (!isStringNumber(input.get(0))
+                || Integer.parseInt(input.get(0)) < MIN_MONTH
+                || Integer.parseInt(input.get(0)) > MAX_MONTH) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
+        }
+        if (!DayOfWeek.contains(input.get(1))) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_ERROR.get());
+        }
+    }
+
+    public static boolean isStringNumber(String input) {
+        for (int i = 0; i < input.length() - 1; ++i) {
+            if (input.charAt(i) < '0' || input.charAt(i) > '9') {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean isEndWithComma(String input) {
