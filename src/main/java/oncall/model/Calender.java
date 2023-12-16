@@ -17,4 +17,14 @@ public class Calender {
         this.startDay = LocalDate.of(2023, month, 1);
         this.startDayOfWeek = DayOfWeek.getFromString(input.get(1));
     }
+
+    public void setRoster(WorkQueue weekdayQueue, WorkQueue weekendQueue) {
+        LocalDate temporaryDay = startDay;
+        DayOfWeek temporaryDayOfWeek = startDayOfWeek;
+        while (temporaryDay.getMonth() == startDay.getMonth()) {
+
+            temporaryDayOfWeek = DayOfWeek.next(temporaryDayOfWeek);
+            temporaryDay = temporaryDay.plusDays(1);
+        }
+    }
 }
